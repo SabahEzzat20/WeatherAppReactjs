@@ -9,7 +9,6 @@ import windSpeedIcon from './images/wind.png'
 import mist from './images/mist.png';
 import smoke from './images/smoke.png';
 import rain from './images/rain.png'
-// import smoke from './images/wind.png'
 import snow from './images/snow.png'
 import haze from './images/haze.png'
 import searchImg from './images/search.png'
