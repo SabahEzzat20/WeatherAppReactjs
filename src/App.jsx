@@ -20,6 +20,8 @@ import Stack from '@mui/material/Stack';
 export const App = () => {
   const [open, setOpen] = useState(false);
   const [city, setCity] = useState('');
+  const [cityExist, setCityExist] = useState(false);
+
   const [weatherData, setWeatherData] = useState({
     windSpeed: '',
     temperature: '',
@@ -71,14 +73,14 @@ export const App = () => {
         setTimeout(() => {
           console.log(forecast);
         }, 2000);
-        // setWeatherData(prevState => ({ ...prevState, loading: false }));
+        setCityExist(true);
       })
       .catch(err => {
         console.log(err);
         setOpen(true);
+        setCityExist(false);
         setWeatherData(prevState => ({ ...prevState, loading: false }));
       })
-      
   }
 
   const handleClose = (event, reason) => {
@@ -106,9 +108,9 @@ export const App = () => {
           <input type="text" autoFocus placeholder="enter city name.."  value={city} onChange={(e)=>setCity(e.target.value)} onKeyDown={handleKeyPress}/>
           <button className="search-button"><img src={searchImg} alt="search-image" onClick={getForecast} /></button>
         </Box>
-        {
-        <Stack direction='row' spacing={10} sx={{paddingTop: '3em',justifyContent:'space-between'}}>
-          <Stack spacing={2} sx={{ width: '50%' }} className="weather">
+        {cityExist &&
+        <Stack spacing={{xs:'20px',sm:'20px',md:'20px',lg:'20px'}} sx={{paddingTop: '3em',justifyContent:'space-between',flexDirection:{xs:'column',sm:'column',md: 'row',lg:'row',xl:'row'}}}>
+          <Stack spacing={2} sx={{ width: {xsl: '100%',sm: '100%', md: '50%',lg: '50%',xl: '50%'}}} className="weather">
             <h2 className="city">{weatherData.cityName}</h2>
             <h1 className="temp">{Math.round(weatherData.temperature)}°C</h1>
             <Stack direction='row' spacing={3} sx={{alignItems: 'center'}}>
@@ -132,7 +134,7 @@ export const App = () => {
                 </Box>
             </Stack>
           </Stack>
-          <Box className="forecast" sx={{ width: '40%' }}>
+          <Box className="forecast" sx={{ width: {xsl: '100%',sm: '100%', md: '40%',lg: '40%',xl: '40%'} }}>
             <Box sx={{ display: 'block'}} className="forecast-container">
               {forecast.slice(0, 40).map((dayForecast, index) => (
                 <Stack direction='row' spacing={2} sx={{justifyContent: 'space-evenly',alignItems: 'center'}} key={index} className="forecast-item">
